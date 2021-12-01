@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Profile from "./components/Profile";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ProtectedRoute } from "./components/auth/Protected.route";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Login} />
+          <ProtectedRoute path="/dashboard" component={Dashboard} />
+          <ProtectedRoute path="/about" component={About} />
+          <ProtectedRoute path="/contact" component={Contact} />
+          <ProtectedRoute path="/profile" component={Profile} />
+          <Route path="*" component={() => "404 Not Found"} />
+        </Switch>
+      </Router>
+    );
+  }
 }
-
-export default App;
